@@ -4,10 +4,12 @@ import dynamic from "next/dynamic";
 import "../styles/home.css";
 import { ApolloProvider } from "@apollo/client";
 import client from "../graphql/client";
+import Header from "../components/Header";
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
+      <Header />
       <Component {...pageProps} />;
     </ApolloProvider>
   );

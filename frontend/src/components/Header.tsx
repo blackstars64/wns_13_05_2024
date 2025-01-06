@@ -2,9 +2,11 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="header">
-      <h1>Checkpoint : frontend</h1>
-      <Link href="/">Countries</Link>
+    <header className="Home-header">
+      <h1 className="Home-header-title">Checkpoint: frontend</h1>
+      <Link href="/" className="Home-header-label">
+        countries
+      </Link>
     </header>
   );
 }

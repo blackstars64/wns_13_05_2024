@@ -46,10 +46,6 @@ function Home() {
 
   return (
     <section className="Home">
-      <header className="Home-header">
-        <h1 className="Home-header-title">Checkpoint: frontend</h1>
-        <p className="Home-header-label">countries</p>
-      </header>
       {isPopupFormOpen && (
         <div className="Home-form">
           <form onSubmit={handleSubmit} className="Home-form-container">
