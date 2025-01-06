@@ -2,9 +2,12 @@ import { ApolloError, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GetCountriesData } from "../graphql/type";
 import { GET_COUNTRIES, ADD_COUNTRY } from "../graphql/queries";
+import PopupInfoCountry from "../components/PopupInfoCountry";
 
 function Home() {
   const [isPopupFormOpen, setIsPopupFormOpen] = useState(false);
+  const [isPopupInfoCountry, setIsPopupInfoCountry] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [emoji, setEmoji] = useState("");
@@ -39,6 +42,11 @@ function Home() {
     } else {
       alert("Please fill out all fields.");
     }
+  };
+
+  const handleCountryClick = (country: any) => {
+    setSelectedCountry(country);
+    setIsPopupInfoCountry(true);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -87,11 +95,21 @@ function Home() {
           </form>
         </div>
       )}
+      {isPopupInfoCountry && selectedCountry && (
+        <PopupInfoCountry
+          country={selectedCountry}
+          onClose={() => setIsPopupInfoCountry(false)}
+        />
+      )}
       {!isPopupFormOpen && (
         <main className="Home-main">
           <div className="Home-country">
             {data?.countries.map((country) => (
-              <div className="Home-country-card" key={country.id}>
+              <div
+                className="Home-country-card"
+                key={country.id}
+                onClick={() => handleCountryClick(country)}
+              >
                 <h3 className="Home-country-name">{country.name}</h3>
                 <p className="Home-country-emoji">{country.emoji}</p>
               </div>
